@@ -17,7 +17,7 @@ body {
 /* Homepage hero start */
 .hero {
     width: 100%;
-    height: 100vh;
+    height: 100%;
 
 }
 
@@ -61,7 +61,7 @@ body {
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease-in-out;
-    z-index: 1; 
+    z-index: 1;
 }
 
 .hero-1 .hero-1-btn-1::before {
@@ -73,23 +73,24 @@ body {
     position: absolute;
     top: 260px;
     transition: all 0.3s ease-in-out;
-    z-index: -1; 
+    z-index: -1;
 }
 
 .hero-1 .hero-1-btn-1:hover::before {
     top: -80px;
 }
-.hero-1-btn-1:hover{
+
+.hero-1-btn-1:hover {
     color: #000;
 }
-/* @media only screen and (max-width: 1210px) {
-    .hero-1 .hero-1-h1-1 {
-        line-height: 65px;
-        font-size: 4vw;
-    }
-  
-    
-} */
+
+.hero-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+
 @media only screen and (max-width: 1220px) {
     .hero-container {
         flex-direction: column;
@@ -118,25 +119,70 @@ body {
         align-items: center;
         justify-content: center;
     }
-    
+
     .hero-2 img {
         width: 100%;
     }
 }
 
 @media only screen and (max-width: 600px) {
-.hero-1 .hero-1-btn-1{
-    margin: 10px 0;
-}
-.hero-1 .hero-1-h1-1{
-    padding: 10px 0;
-}
-.hero-1 .hero-1-p-1{
-    padding: 10px 0;
-}
-.hero-container{
-    margin: 0 10px;
-}
+    .hero-1 .hero-1-btn-1 {
+        margin: 10px 0;
+    }
+
+    .hero-1 .hero-1-h1-1 {
+        padding: 10px 0;
+    }
+
+    .hero-1 .hero-1-p-1 {
+        padding: 10px 0;
+    }
+
+    .hero-container {
+        margin: 0 10px;
+    }
 }
 
 /* Homepage hero end */
+
+
+/* Homepage brands start */
+.brands {
+    background: #000;
+    width: 100%;
+    height: 100%;
+    /* padding: 30px 40px; */
+}
+
+.brands-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.brands-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .brands-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .brands-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+}
+
+/* Homepage brands end */
