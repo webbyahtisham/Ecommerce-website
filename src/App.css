@@ -186,3 +186,25 @@ body {
 }
 
 /* Homepage brands end */
+
+/*Category  start*/
+.category {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  
+  
+  /* Responsive */
+  /* @media (max-width: 768px) {
+    .product-card {
+      padding: 15px;
+    }
+    .product-title {
+      font-size: 14px;
+    }
+    .product-price {
+      font-size: 16px;
+    }
+  } */
+/*Category  end*/
