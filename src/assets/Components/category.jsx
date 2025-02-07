@@ -19,8 +19,38 @@ const items = [
 const Category = ({ h1 }) => {
   return (
     <section className="category">
-      <div className="category-container">
+      <div className="category-start">
         <h1 className="category-title">{h1}</h1>
+      </div>
+      <div className="category-container">
+      <div className="card">
+        <img src={img7} alt="" />
+        <div className="cat-product-things">
+        <div className="cat-title">T-shirt with Tape Details</div>
+        <div className="cat-price">$120</div>
+        </div>
+      </div>
+      <div className="card">
+        <img src={img7} alt="" />
+        <div className="cat-product-things">
+        <div className="cat-title">T-shirt with Tape Details</div>
+        <div className="cat-price">$120</div>
+        </div>
+      </div>
+      <div className="card">
+        <img src={img7} alt="" />
+        <div className="cat-product-things">
+        <div className="cat-title">T-shirt with Tape Details</div>
+        <div className="cat-price">$120</div>
+        </div>
+      </div>
+      <div className="card">
+        <img src={img7} alt="" />
+        <div className="cat-product-things">
+        <div className="cat-title">T-shirt with Tape Details</div>
+        <div className="cat-price">$120</div>
+        </div>
+      </div>
       </div>
     </section>
   );
