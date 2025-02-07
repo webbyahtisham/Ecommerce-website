@@ -1,9 +1,5 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import { FreeMode } from 'swiper/modules';
-
+import 'remixicon/fonts/remixicon.css'
 import img7 from '../Images/image 7.png';
 import img8 from '../Images/image 8.png';
 import img9 from '../Images/image 9.png';
@@ -23,34 +19,23 @@ const Category = ({ h1 }) => {
         <h1 className="category-title">{h1}</h1>
       </div>
       <div className="category-container">
-      <div className="card">
-        <img src={img7} alt="" />
-        <div className="cat-product-things">
-        <div className="cat-title">T-shirt with Tape Details</div>
-        <div className="cat-price">$120</div>
-        </div>
+        {items.map((item) => (
+          <div className="card" key={item.id}>
+            <div className="img-wrapper">
+              <img src={item.image} alt={item.title} />
+              <button className="add-to-cart">
+              <i class="ri-shopping-bag-line"></i>
+              </button>
+            </div>
+            <div className="cat-product-things">
+              <div className="cat-title">{item.title}</div>
+              <div className="cat-price">{item.price}</div>
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="card">
-        <img src={img7} alt="" />
-        <div className="cat-product-things">
-        <div className="cat-title">T-shirt with Tape Details</div>
-        <div className="cat-price">$120</div>
-        </div>
-      </div>
-      <div className="card">
-        <img src={img7} alt="" />
-        <div className="cat-product-things">
-        <div className="cat-title">T-shirt with Tape Details</div>
-        <div className="cat-price">$120</div>
-        </div>
-      </div>
-      <div className="card">
-        <img src={img7} alt="" />
-        <div className="cat-product-things">
-        <div className="cat-title">T-shirt with Tape Details</div>
-        <div className="cat-price">$120</div>
-        </div>
-      </div>
+      <div className="category-button">
+        <button>Vew all</button>
       </div>
     </section>
   );
