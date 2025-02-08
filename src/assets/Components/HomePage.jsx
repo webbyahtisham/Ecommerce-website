@@ -1,10 +1,12 @@
 import React from 'react'
+import NewArrival from '../Components/NewArrival'
 import heroImg from '../Images/Hero.png'
 import versace from '../Images/versace.png'
 import zara from '../Images/zara.png'
 import gucci from '../Images/gucci.png'
 import prada from '../Images/prada.png'
 import ck from '../Images/ck.png'
+import TopSelling from './TopSelling'
 const HomePage = () => {
     return (
         <>
@@ -30,7 +32,8 @@ const HomePage = () => {
                         </div>
                     </section>
                 </section>
-
+                <NewArrival h1={"New arrival"} />
+                <TopSelling h1={"Top selling"}/>
             </main>
         </>
     )
