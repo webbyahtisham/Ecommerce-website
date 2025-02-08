@@ -1,12 +1,13 @@
 import React from 'react'
 import NewArrival from '../Components/NewArrival'
+import TopSelling from './TopSelling'
+import Subscribe from '../Components/Subscribe'
 import heroImg from '../Images/Hero.png'
 import versace from '../Images/versace.png'
 import zara from '../Images/zara.png'
 import gucci from '../Images/gucci.png'
 import prada from '../Images/prada.png'
 import ck from '../Images/ck.png'
-import TopSelling from './TopSelling'
 import img15 from '../Images/image 15.png'
 import img16 from '../Images/image 16.png'
 import img17 from '../Images/image 17.png'
@@ -61,6 +62,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </section>
+                <Subscribe/>
             </main>
         </>
     )
