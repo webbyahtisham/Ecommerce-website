@@ -7,6 +7,10 @@ import gucci from '../Images/gucci.png'
 import prada from '../Images/prada.png'
 import ck from '../Images/ck.png'
 import TopSelling from './TopSelling'
+import img15 from '../Images/image 15.png'
+import img16 from '../Images/image 16.png'
+import img17 from '../Images/image 17.png'
+import img18 from '../Images/image 18.png'
 const HomePage = () => {
     return (
         <>
@@ -33,7 +37,30 @@ const HomePage = () => {
                     </section>
                 </section>
                 <NewArrival h1={"New arrival"} />
-                <TopSelling h1={"Top selling"}/>
+                <TopSelling h1={"Top selling"} />
+                <section className="dress-style">
+                    <div className="dress-style-container1">
+                        <h2>BROWSE BY DRESS STYLE</h2>
+                        <div className="dress-style-container2">
+                            <div class="dress-style-item">
+                                <img src={img15} alt="Casual" />
+                                <span>Casual</span>
+                            </div>
+                            <div class="dress-style-item">
+                                <img src={img16} alt="Formal" />
+                                <span>Formal</span>
+                            </div>
+                            <div class="dress-style-item">
+                                <img src={img17} alt="Party" />
+                                <span>Party</span>
+                            </div>
+                            <div class="dress-style-item">
+                                <img src={img18} alt="Gym" />
+                                <span>Gym</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </>
     )
