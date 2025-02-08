@@ -24,7 +24,7 @@ const NewArrival = ({ h1 }) => {
             <div className="img-wrapper">
               <img src={item.image} alt={item.title} />
               <button className="add-to-cart">
-              <i class="ri-shopping-bag-line"></i>
+              <i className="ri-shopping-bag-line"></i>
               </button>
             </div>
             <div className="cat-product-things">
