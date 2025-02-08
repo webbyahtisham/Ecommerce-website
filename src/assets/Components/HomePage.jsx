@@ -42,19 +42,19 @@ const HomePage = () => {
                     <div className="dress-style-container1">
                         <h2>BROWSE BY DRESS STYLE</h2>
                         <div className="dress-style-container2">
-                            <div class="dress-style-item">
+                            <div className="dress-style-item">
                                 <img src={img15} alt="Casual" />
                                 <span>Casual</span>
                             </div>
-                            <div class="dress-style-item">
+                            <div className="dress-style-item">
                                 <img src={img16} alt="Formal" />
                                 <span>Formal</span>
                             </div>
-                            <div class="dress-style-item">
+                            <div className="dress-style-item">
                                 <img src={img17} alt="Party" />
                                 <span>Party</span>
                             </div>
-                            <div class="dress-style-item">
+                            <div className="dress-style-item">
                                 <img src={img18} alt="Gym" />
                                 <span>Gym</span>
                             </div>
