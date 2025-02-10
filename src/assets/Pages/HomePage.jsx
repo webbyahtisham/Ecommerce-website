@@ -1,6 +1,6 @@
 import React from 'react'
 import NewArrival from '../Components/NewArrival'
-import TopSelling from './TopSelling'
+import TopSelling from '../Components/TopSelling'
 import Subscribe from '../Components/Subscribe'
 import heroImg from '../Images/Hero.png'
 import versace from '../Images/versace.png'
