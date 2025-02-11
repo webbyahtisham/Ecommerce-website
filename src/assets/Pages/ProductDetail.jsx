@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import thambnail from '../Images/image 11.png';
+import Button from '../Components/Button';
 
 const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
@@ -112,9 +113,8 @@ const ProductDetail = () => {
             {/* Reviews Section */}
             {activeSection === 'reviews' && (
               <div className="section-container">
-                <button className="write-review-btn" onClick={() => setShowReviewForm(true)}>
-                  Write Review
-                </button>
+                <Button name={"write review"} onClick={() => setShowReviewForm(true)}>
+                </Button>
       
                 <div className="reviews-grid">
                   {reviews.map((review, index) => (
