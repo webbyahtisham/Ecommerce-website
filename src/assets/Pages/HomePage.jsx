@@ -12,6 +12,7 @@ import img15 from '../Images/image 15.png'
 import img16 from '../Images/image 16.png'
 import img17 from '../Images/image 17.png'
 import img18 from '../Images/image 18.png'
+import Button from '../Components/Button'
 const HomePage = () => {
     return (
         <>
@@ -21,7 +22,7 @@ const HomePage = () => {
                         <div className="hero-1">
                             <h1 className='hero-1-h1-1'>Find cloths <br /> that matches <br /> your style</h1>
                             <p className='hero-1-p-1'>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
-                            <button className='hero-1-btn-1' >shop now</button>
+                            <Button name={"shop now"}/>
                         </div>
                         <div className="hero-2">
                             <img src={heroImg} alt="heroimg" />
