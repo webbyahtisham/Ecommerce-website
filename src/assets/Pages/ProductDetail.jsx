@@ -187,7 +187,7 @@ const ProductDetail = () => {
                 </form>
               </div>
             )}
-            <TopSelling/>
+            <TopSelling h1={"You might also like"}/>
             <Subscribe/>
            </section>
           </>
