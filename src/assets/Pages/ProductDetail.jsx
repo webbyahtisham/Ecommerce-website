@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import thambnail from '../Images/image 11.png';
 import Button from '../Components/Button';
+import Subscribe from '../Components/Subscribe'
+import TopSelling from '../Components/TopSelling'
 
 const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
@@ -185,6 +187,8 @@ const ProductDetail = () => {
                 </form>
               </div>
             )}
+            <TopSelling/>
+            <Subscribe/>
            </section>
           </>
     );
