@@ -1,0 +1,127 @@
+import { useState } from 'react';
+
+const FiltersBar = () => {
+  const [minPrice, setMinPrice] = useState(20);
+  const [maxPrice, setMaxPrice] = useState(150);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const maxRange = 200;
+
+  const handleMinChange = (e) => {
+    const value = Math.min(Number(e.target.value), maxPrice - 1);
+    setMinPrice(value);
+  };
+
+  const handleMaxChange = (e) => {
+    const value = Math.max(Number(e.target.value), minPrice + 1);
+    setMaxPrice(value);
+  };
+
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
+
+  const handleColorClick = (color) => {
+    setSelectedColor(selectedColor === color ? null : color);
+  };
+
+  const colors = [
+    '#ff0000', '#0000ff', '#000000', 
+    '#ffffff', '#00ff00', '#ffff00'
+  ];
+
+  const minPosition = (minPrice / maxRange) * 100;
+  const maxPosition = (maxPrice / maxRange) * 100;
+
+  return (
+    <div className="filter-panel">
+      {/* Category Filter */}
+      <div className="filter-section">
+        <h3>Category</h3>
+        <div className="category-options">
+          <label><input type="checkbox" /> T-shirts</label>
+          <label><input type="checkbox" /> Shirts</label>
+          <label><input type="checkbox" /> Shorts</label>
+          <label><input type="checkbox" /> Hoodies</label>
+          <label><input type="checkbox" /> Jeans</label>
+        </div>
+      </div>
+
+      {/* Price Filter */}
+      <div className="filter-section">
+        <h3>Price</h3>
+        <div className="price-slider-wrapper">
+          <div className="price-slider">
+            <div className="slider-track" />
+            <div 
+              className="active-track" 
+              style={{
+                left: `${minPosition}%`,
+                right: `${100 - maxPosition}%`
+              }}
+            />
+            <input
+              type="range"
+              min="0"
+              max={maxRange}
+              value={minPrice}
+              onChange={handleMinChange}
+              className="range-input min"
+            />
+            <input
+              type="range"
+              min="0"
+              max={maxRange}
+              value={maxPrice}
+              onChange={handleMaxChange}
+              className="range-input max"
+            />
+          </div>
+          <div className="price-labels">
+            <span>$0</span>
+            <span>${maxRange}</span>
+          </div>
+          <div className="selected-range">Selected: ${minPrice} - ${maxPrice}</div>
+        </div>
+      </div>
+
+      {/* Colors Filter */}
+      <div className="filter-section">
+        <h3>Colors</h3>
+        <div className="color-options">
+          {colors.map((color) => (
+            <div
+              key={color}
+              className={`color-circle ${selectedColor === color ? 'selected' : ''} ${color === '#ffffff' ? 'white' : ''}  ${color === '#ffff00' ? 'white' : ''}`}
+              style={{ 
+                backgroundColor: color,
+                
+              }}
+              onClick={() => handleColorClick(color)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Sizes Filter */}
+      <div className="filter-section">
+        <h3>Size</h3>
+        <div className="size-options">
+          {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+            <button
+              key={size}
+              className={`size-btn ${selectedSize === size ? 'selected' : ''}`}
+              onClick={() => handleSizeClick(size)}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button id="apply-filters">Apply Filters</button>
+    </div>
+  );
+};
+
+export default FiltersBar;

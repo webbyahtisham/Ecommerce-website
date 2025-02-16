@@ -43,6 +43,7 @@ body {
     color: #616060;
     padding: 20px 0;
 }
+
 /* button */
 .button {
     outline: none;
@@ -787,7 +788,7 @@ textarea {
     margin-bottom: 1rem;
 }
 
-.specifications h3{
+.specifications h3 {
     margin-bottom: 1rem;
 }
 
@@ -808,11 +809,13 @@ textarea {
     flex-direction: column;
     gap: 10px;
 }
+
 @media (max-width: 625px) {
     .section-container {
         padding: 0;
     }
 }
+
 @media (max-width: 380px) {
     .section-nav button {
         padding: 0.8rem 0.5rem;
@@ -820,3 +823,201 @@ textarea {
 }
 
 /* Product detail page ends */
+
+/* FiltersBar start */
+.filter-panel {
+    width: 300px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.filter-section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.category-options label {
+    display: block;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+/* Price Slider Styles */
+.price-slider {
+    position: relative;
+    height: 4px;
+    background: #ddd;
+    margin: 30px 0;
+}
+
+.slider-track {
+    position: absolute;
+    height: 4px;
+    background: #007bff;
+    top: 0;
+}
+
+.slider-handles {
+    position: relative;
+    height: 4px;
+}
+
+.handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    top: -7px;
+    cursor: pointer;
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+}
+
+.selected-range {
+    text-align: center;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+/* Color Picker */
+.color-options {
+    display: flex;
+    gap: 10px;
+}
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+
+
+.color-circle.selected::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: white;
+}
+
+.color-circle.white.selected::after {
+    color: #000;
+}
+
+
+
+
+
+/* Size Options */
+.size-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.size-btn {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.size-btn.selected {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+#apply-filters {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.price-slider-wrapper {
+    position: relative;
+    margin: 30px 0;
+}
+
+.price-slider {
+    position: relative;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.slider-track {
+    position: absolute;
+    height: 100%;
+    background: #ddd;
+    width: 100%;
+}
+
+.active-track {
+    position: absolute;
+    height: 100%;
+    background: #007bff;
+    z-index: 1;
+}
+
+.range-input {
+    -webkit-appearance: none;
+    position: absolute;
+    /* top: -6px; */
+    height: 4px;
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.range-input::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+
+/* FiltersBar end */
