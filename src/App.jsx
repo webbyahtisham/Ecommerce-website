@@ -1,11 +1,13 @@
 import './App.css'
+import Shop from './assets/Pages/Shop'
 // import HomePage from './assets/Pages/HomePage'
-import ProductDetail from './assets/Pages/ProductDetail'
+// import ProductDetail from './assets/Pages/ProductDetail'
 function App() {
   return (
     <>
       {/* <HomePage/> */}
-      <ProductDetail/>
+      {/* <ProductDetail/> */}
+      <Shop/>
     </>
   )
 }
