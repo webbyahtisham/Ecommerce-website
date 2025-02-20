@@ -990,7 +990,6 @@ h3 {
 .range-input {
     -webkit-appearance: none;
     position: absolute;
-    /* top: -6px; */
     height: 4px;
     width: 100%;
     background: transparent;
