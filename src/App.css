@@ -820,8 +820,12 @@ textarea {
 /* FiltersBar start */
 .filter-panel {
     width: 300px;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 16px;
+    box-sizing: border-box;
+    height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
 .filter-section {
@@ -1015,8 +1019,20 @@ h3 {
 
 /* FiltersBar end */
 /* Shop start */
+.shop {
+    display: flex;
+    height: 100vh; /* Full height to handle independent scrolling */
+    overflow: hidden;
+}
+
+
+
 .shop-container {
     padding: 20px;
+    flex-grow: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100vh;
 }
 
 .shop-title {
@@ -1039,14 +1055,22 @@ h3 {
     justify-content: center;
 }
 
-
 .product-card {
     background-color: transparent;
     border-radius: 8px;
     box-sizing: border-box;
     transition: box-shadow 0.3s ease;
     width: calc(25% - 16px);
-    /* 4 per row by default (large screens) */
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .add-to-cart {
@@ -1070,24 +1094,17 @@ h3 {
     bottom: 10px;
 }
 
-.shop-img-wrapper .add-to-cart:hover {
+.add-to-cart:hover {
     background-color: white;
 }
 
-.shop-img-wrapper .add-to-cart:hover i {
-    color: black;
-}
-
-.shop-img-wrapper .add-to-cart i {
+.add-to-cart i {
     font-size: 20px;
     color: white;
 }
 
-
-.product-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+.add-to-cart:hover i {
+    color: black;
 }
 
 .product-title {
@@ -1129,17 +1146,25 @@ h3 {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
     .product-card {
         width: calc(50% - 16px);
-        /* 2 per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-panel {
+        display: none;
+    }
+
+    .product-card {
+        width: calc(50% - 16px);
     }
 }
 
 @media (max-width: 480px) {
     .product-card {
         width: calc(100% - 16px);
-        /* 1 per row */
     }
 }
 
