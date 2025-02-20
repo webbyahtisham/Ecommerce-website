@@ -25,16 +25,12 @@ const FiltersBar = () => {
     setSelectedColor(selectedColor === color ? null : color);
   };
 
-  const colors = [
-    '#ff0000', '#0000ff', '#000000', 
-    '#ffffff', '#00ff00', '#ffff00'
-  ];
-
+  const colors = ['#ff0000', '#0000ff', '#000000', '#ffffff', '#00ff00', '#ffff00'];
   const minPosition = (minPrice / maxRange) * 100;
   const maxPosition = (maxPrice / maxRange) * 100;
 
   return (
-    <div className="filter-panel">
+    <div>
       {/* Category Filter */}
       <div className="filter-section">
         <h3>Category</h3>
@@ -53,29 +49,9 @@ const FiltersBar = () => {
         <div className="price-slider-wrapper">
           <div className="price-slider">
             <div className="slider-track" />
-            <div 
-              className="active-track" 
-              style={{
-                left: `${minPosition}%`,
-                right: `${100 - maxPosition}%`
-              }}
-            />
-            <input
-              type="range"
-              min="0"
-              max={maxRange}
-              value={minPrice}
-              onChange={handleMinChange}
-              className="range-input min"
-            />
-            <input
-              type="range"
-              min="0"
-              max={maxRange}
-              value={maxPrice}
-              onChange={handleMaxChange}
-              className="range-input max"
-            />
+            <div className="active-track" style={{ left: `${minPosition}%`, right: `${100 - maxPosition}%` }} />
+            <input type="range" min="0" max={maxRange} value={minPrice} onChange={handleMinChange} className="range-input min" />
+            <input type="range" min="0" max={maxRange} value={maxPrice} onChange={handleMaxChange} className="range-input max" />
           </div>
           <div className="price-labels">
             <span>$0</span>
@@ -92,11 +68,8 @@ const FiltersBar = () => {
           {colors.map((color) => (
             <div
               key={color}
-              className={`color-circle ${selectedColor === color ? 'selected' : ''} ${color === '#ffffff' ? 'white' : ''}  ${color === '#ffff00' ? 'white' : ''}`}
-              style={{ 
-                backgroundColor: color,
-                
-              }}
+              className={`color-circle ${selectedColor === color ? 'selected' : ''} ${color === '#ffffff' || color === '#ffff00' ? 'white' : ''}`}
+              style={{ backgroundColor: color }}
               onClick={() => handleColorClick(color)}
             />
           ))}
@@ -108,11 +81,7 @@ const FiltersBar = () => {
         <h3>Size</h3>
         <div className="size-options">
           {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-            <button
-              key={size}
-              className={`size-btn ${selectedSize === size ? 'selected' : ''}`}
-              onClick={() => handleSizeClick(size)}
-            >
+            <button key={size} className={`size-btn ${selectedSize === size ? 'selected' : ''}`} onClick={() => handleSizeClick(size)}>
               {size}
             </button>
           ))}
