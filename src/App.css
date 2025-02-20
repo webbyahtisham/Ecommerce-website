@@ -320,9 +320,6 @@ body {
     }
 }
 
-
-
-
 /*Category  end*/
 
 /* Dress style start */
@@ -379,10 +376,6 @@ body {
 .dress-style-item:hover img {
     transform: scale(1.05);
 }
-
-
-
-
 
 .dress-style-item span {
     position: absolute;
@@ -899,6 +892,7 @@ h3 {
     display: flex;
     gap: 10px;
 }
+
 .color-circle {
     width: 30px;
     height: 30px;
@@ -1020,3 +1014,134 @@ h3 {
 
 
 /* FiltersBar end */
+/* Shop start */
+.shop-container {
+    padding: 20px;
+}
+
+.shop-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+}
+
+.shop-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.product-card {
+    background-color: transparent;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+    width: calc(25% - 16px);
+    /* 4 per row by default (large screens) */
+}
+
+.add-to-cart {
+    position: absolute;
+    bottom: -50px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-img-wrapper:hover .add-to-cart {
+    bottom: 10px;
+}
+
+.shop-img-wrapper .add-to-cart:hover {
+    background-color: white;
+}
+
+.shop-img-wrapper .add-to-cart:hover i {
+    color: black;
+}
+
+.shop-img-wrapper .add-to-cart i {
+    font-size: 20px;
+    color: white;
+}
+
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-title {
+    font-size: 16px;
+    margin: 10px 0 4px;
+    font-weight: 600;
+}
+
+.product-rating {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.new-price {
+    color: black;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 14px;
+}
+
+.discount {
+    color: red;
+    font-size: 12px;
+    background-color: #ffe6e6;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(50% - 16px);
+        /* 2 per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        width: calc(100% - 16px);
+        /* 1 per row */
+    }
+}
+
+
+/* Shop End */
