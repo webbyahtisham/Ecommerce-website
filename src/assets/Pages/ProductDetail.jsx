@@ -28,7 +28,21 @@ const ProductDetail = () => {
     const handleSizeClick = (size) => setSelectedSize(size);
     const handleIncrease = () => setQuantity((prev) => prev + 1);
     const handleDecrease = () => quantity > 1 && setQuantity((prev) => prev - 1);
-    document.title = `${product.title} - Product Details`; // Optional: Set page title
+
+    const handleSubmitReview = (e) => {
+        e.preventDefault();
+        setReviews([...reviews, {
+            name: "New User",
+            date: new Date().toLocaleDateString('en-US'),
+            text: newReview.text,
+            rating: newReview.rating,
+        }]);
+        setShowReviewForm(false);
+        setNewReview({ text: '', rating: 5 });
+    };
+
+    document.title = `${product.title} - Product Details`;
+
     return (
         <section className="product">
             <div className="product-detail-container">
@@ -72,6 +86,99 @@ const ProductDetail = () => {
                     <button className="product-add-to-cart">Add to Cart</button>
                 </div>
             </div>
+
+            <div className="section-nav">
+                <button onClick={() => setActiveSection('details')}>Product Details</button>
+                <button onClick={() => setActiveSection('reviews')}>Reviews ({reviews.length})</button>
+                <button onClick={() => setActiveSection('faq')}>FAQs</button>
+            </div>
+
+            {activeSection === 'details' && (
+                <div className="section-container">
+                    <h2>Product Details</h2>
+                    <p className="product-description">Premium quality product designed for style and comfort. Made with high-quality materials for durability.</p>
+                    <div className="specifications">
+                        <h3>Specifications</h3>
+                        <ul>
+                            <li>Material: 100% Cotton</li>
+                            <li>Dimensions: Varies by size</li>
+                            <li>Weight: 1.5 lbs</li>
+                            <li>Warranty: 1 Year</li>
+                        </ul>
+                    </div>
+                </div>
+            )}
+
+            {activeSection === 'reviews' && (
+                <div className="section-container">
+                    <Button name={"Write Review"} onClick={() => setShowReviewForm(true)} />
+                    <div className="reviews-grid">
+                        {reviews.map((review, index) => (
+                            <div key={index} className="review-card">
+                                <div className="review-header">
+                                    <h4>{review.name}</h4>
+                                    <div className="rating-stars">
+                                        {[...Array(review.rating)].map((_, i) => (
+                                            <span key={i} className="star">★</span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <p className="review-text">{review.text}</p>
+                                <p className="review-date">{review.date}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {activeSection === 'faq' && (
+                <div className="section-container">
+                    <div className="faq-item">
+                        <h3>What materials are used?</h3>
+                        <p>We use high-quality, sustainable materials for long-lasting products.</p>
+                    </div>
+                    <div className="faq-item">
+                        <h3>Shipping time?</h3>
+                        <p>Standard shipping takes 3-5 business days. Express shipping is available.</p>
+                    </div>
+                    <div className="faq-item">
+                        <h3>Return policy?</h3>
+                        <p>You can return unused products within 30 days for a full refund.</p>
+                    </div>
+                </div>
+            )}
+
+            {showReviewForm && (
+                <div className="modal-overlay">
+                    <form className="review-form" onSubmit={handleSubmitReview}>
+                        <h2>Write a Review</h2>
+                        <div className="rating-selector">
+                            {[1, 2, 3, 4, 5].map((num) => (
+                                <button
+                                    type="button"
+                                    key={num}
+                                    className={`star-btn ${num <= newReview.rating ? 'selected' : ''}`}
+                                    onClick={() => setNewReview({ ...newReview, rating: num })}
+                                >
+                                    ★
+                                </button>
+                            ))}
+                        </div>
+                        <textarea
+                            value={newReview.text}
+                            onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
+                            placeholder="Share your experience..."
+                            required
+                        />
+                        <div className="form-buttons">
+                            <button type="submit">Submit</button>
+                            <button type="button" onClick={() => setShowReviewForm(false)}>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
 
             <TopSelling h1={"You might also like"} />
             <Subscribe />
