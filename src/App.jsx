@@ -1,16 +1,15 @@
-import './App.css'
-import Cart from './assets/Pages/Cart'
-// import Shop from './assets/Pages/Shop'
-// import HomePage from './assets/Pages/HomePage'
-// import ProductDetail from './assets/Pages/ProductDetail'
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Shop from './assets/Pages/Shop';
+import ProductDetail from './assets/Pages/ProductDetail';
+
 function App() {
   return (
-    <>
-      {/* <HomePage/> */}
-      {/* <ProductDetail/> */}
-      {/* <Shop/> */}
-      <Cart/>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Shop />} />
+      <Route path="/product/:id/:title" element={<ProductDetail />} />
+    </Routes>
+  );
 }
-export default App
+
+export default App;
