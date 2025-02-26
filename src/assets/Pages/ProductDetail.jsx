@@ -66,18 +66,21 @@ const ProductDetail = () => {
                     <div className="product-size">
                         <div className="product-size-p">Choose Size</div>
                         <div className="sizes">
-                            {["Small", "Medium", "Large", "X-Large"].map((size) => (
-                                <div
-                                    key={size}
-                                    className={`size-button ${selectedSize === size ? "selected" : ""}`}
-                                    onClick={() => handleSizeClick(size)}
-                                >
-                                    {size}
-                                </div>
-                            ))}
+                            {product.size && product.size.length > 0 ? (
+                                product.size.map((size) => (
+                                    <div
+                                        key={size}
+                                        className={`size-button ${selectedSize === size ? "selected" : ""}`}
+                                        onClick={() => handleSizeClick(size)}
+                                    >
+                                        {size}
+                                    </div>
+                                ))
+                            ) : (
+                                <div>No sizes available</div>
+                            )}
                         </div>
                     </div>
-
                     <div className="quantity-selector">
                         <button onClick={handleDecrease}>-</button>
                         <span>{quantity}</span>
