@@ -1457,3 +1457,170 @@ textarea {
 }
 
 /* Cart page end */
+
+
+
+.navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    gap: 20px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .menu-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 100;
+  }
+  
+  .nav-links {
+    display: none;
+    gap: 2rem;
+    flex: 1;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+  }
+  
+  .right-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .search-container {
+    display: none;
+  }
+  
+  .search-container input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    width: 29vw;
+  }
+  
+  .nav-icons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-icons a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 20px;
+    background: white;
+    border-top: 1px solid #eee;
+  }
+  
+  .mobile-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+  }
+  
+  /* Desktop Styles */
+  @media (min-width: 890px) {
+    .menu-button {
+      display: none;
+    }
+    
+    .logo {
+      position: static;
+      transform: none;
+      margin-right: auto;
+    }
+    
+    .nav-links {
+      display: flex;
+      margin-right: auto;
+    }
+    
+    .search-container {
+      display: block;
+    }
+    
+    .right-section {
+      margin-left: auto;
+    }
+    
+    .nav-icons {
+      display: flex;
+    }
+    
+    .mobile-menu {
+      display: none;
+    }
+  }
+  /* Add these to your existing Navbar.css */
+
+.logo {
+    /* existing styles */
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .nav-item {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-item:hover {
+    color: #666;
+  }
+  
+  .icon-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  .icon-link:hover {
+    color: #666;
+  }
+  
+  .mobile-nav-item {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-nav-item:hover {
+    color: #666;
+  }
