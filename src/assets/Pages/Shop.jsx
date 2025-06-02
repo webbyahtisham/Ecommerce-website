@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from './Product';
 import 'remixicon/fonts/remixicon.css';
 import FiltersBar from '../Components/FiltersBar';
 
 const Shop = () => {
+    
+    const filterPanelRef = useRef(null);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [activeFilters, setActiveFilters] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 12;
     const navigate = useNavigate();
 
     const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
@@ -24,6 +28,7 @@ const Shop = () => {
         'hoodies': 'Hoodie',
         'jeans': 'Jeans',
     };
+
     const filteredProducts = products.filter((product) => {
         if (Object.keys(activeFilters).length === 0) return true;
     
@@ -44,21 +49,49 @@ const Shop = () => {
             categoryMatch
         );
     });
+
+    // Pagination logic
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const clearAllFilters = () => {
         setActiveFilters({});
+        setCurrentPage(1);
     };
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [activeFilters]);
+ 
     return (
-        <>
+        <div className="shop-wrapper">
             <div className="shop">
                 <div className={`filter-panel ${isFilterOpen ? 'open' : ''}`}>
-                <FiltersBar onApplyFilters={setActiveFilters} onClearFilters={clearAllFilters} />
+                    <FiltersBar 
+                        onApplyFilters={setActiveFilters} 
+                        onClearFilters={clearAllFilters} 
+                    />
                 </div>
 
                 <div className="shop-container">
-                    <h1 className="shop-title">Shop</h1>
+                    <div className="shop-header">
+                        <h1 className="shop-title">Shop</h1>
+                        <div className="products-count">
+                            Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
+                        </div>
+                    </div>
+                    
                     <div className="products-grid">
-                        {filteredProducts.length > 0 ? (
-                            filteredProducts.map((product) => (
+                        {currentProducts.length > 0 ? (
+                            currentProducts.map((product) => (
                                 <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
                                     <div className="shop-img-wrapper">
                                         <img src={product.img} alt={product.title} className="product-image" />
@@ -85,13 +118,42 @@ const Shop = () => {
                             <div className="no-products">We don't have this product 🫤</div>
                         )}
                     </div>
+
+                    {filteredProducts.length > productsPerPage && (
+                        <div className="pagination">
+                            <button 
+                                onClick={() => handlePageChange(currentPage - 1)} 
+                                disabled={currentPage === 1}
+                            >
+                                <i className="ri-arrow-left-s-line"></i> Previous
+                            </button>
+                            
+                            {Array.from({ length: totalPages }, (_, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => handlePageChange(i + 1)}
+                                    className={currentPage === i + 1 ? 'active' : ''}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                            
+                            <button 
+                                onClick={() => handlePageChange(currentPage + 1)} 
+                                disabled={currentPage === totalPages}
+                            >
+                                Next <i className="ri-arrow-right-s-line"></i>
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 <button className="filter-toggle-button" onClick={toggleFilter}>
                     {isFilterOpen ? <i className="ri-close-line"></i> : <i className="ri-filter-3-line"></i>}
+                    <span className="filter-text">{isFilterOpen ? 'Close' : 'Filters'}</span>
                 </button>
             </div>
-        </>
+        </div>
     );
 };
 
