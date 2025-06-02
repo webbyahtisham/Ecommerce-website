@@ -5,6 +5,7 @@ import Shop from './assets/Pages/Shop';
 import ProductDetail from './assets/Pages/ProductDetail';
 import Cart from './assets/Pages/Cart'
 import Homepage from './assets/Pages/HomePage'
+import Footer from './assets/Components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/product/:id/:title" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
+      <Footer/>
     </>
 
   );
