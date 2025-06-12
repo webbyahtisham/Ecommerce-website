@@ -1,11 +1,12 @@
- import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from './Product';
 import 'remixicon/fonts/remixicon.css';
 import FiltersBar from '../Components/FiltersBar';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Redux/cartSlice';
 const Shop = () => {
-    
+
     const filterPanelRef = useRef(null);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [activeFilters, setActiveFilters] = useState({});
@@ -20,7 +21,7 @@ const Shop = () => {
         navigate(`/product/${product.id}/${slugTitle}`, { state: { product } });
     };
 
-    // Filter products based on active filters
+
     const styleMap = {
         't-shirts': 'T-shirt',
         'shirts': 'Shirt',
@@ -31,16 +32,16 @@ const Shop = () => {
 
     const filteredProducts = products.filter((product) => {
         if (Object.keys(activeFilters).length === 0) return true;
-    
+
         const productPrice = product.discountPrice || product.price;
-    
-        // Handle category selection as an array
+
+
         const selectedCategories = activeFilters.selectedCategories || [];
         const categoryMatch = selectedCategories.length === 0 || selectedCategories.some((category) => {
             const mappedStyle = styleMap[category.toLowerCase()];
             return mappedStyle && product.style === mappedStyle;
-        });   
-    
+        });
+
         return (
             productPrice >= activeFilters.minPrice &&
             productPrice <= activeFilters.maxPrice &&
@@ -50,7 +51,7 @@ const Shop = () => {
         );
     });
 
-    // Pagination logic
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -66,18 +67,18 @@ const Shop = () => {
         setCurrentPage(1);
     };
 
-    // Reset to page 1 when filters change
+
     useEffect(() => {
         setCurrentPage(1);
     }, [activeFilters]);
- 
+    const dispatch = useDispatch();
     return (
         <div className="shop-wrapper">
             <div className="shop">
                 <div className={`filter-panel ${isFilterOpen ? 'open' : ''}`}>
-                    <FiltersBar 
-                        onApplyFilters={setActiveFilters} 
-                        onClearFilters={clearAllFilters} 
+                    <FiltersBar
+                        onApplyFilters={setActiveFilters}
+                        onClearFilters={clearAllFilters}
                     />
                 </div>
 
@@ -88,14 +89,20 @@ const Shop = () => {
                             Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
                         </div>
                     </div>
-                    
+
                     <div className="products-grid">
                         {currentProducts.length > 0 ? (
                             currentProducts.map((product) => (
                                 <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
                                     <div className="shop-img-wrapper">
                                         <img src={product.img} alt={product.title} className="product-image" />
-                                        <button className="add-to-cart">
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation(); // Prevent card click
+                                                dispatch(addToCart(product));
+                                            }}
+                                            className="add-to-cart"
+                                        >
                                             <i className="ri-shopping-bag-line"></i>
                                         </button>
                                     </div>
@@ -121,13 +128,13 @@ const Shop = () => {
 
                     {filteredProducts.length > productsPerPage && (
                         <div className="pagination">
-                            <button 
-                                onClick={() => handlePageChange(currentPage - 1)} 
+                            <button
+                                onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
                             >
                                 <i className="ri-arrow-left-s-line"></i> Previous
                             </button>
-                            
+
                             {Array.from({ length: totalPages }, (_, i) => (
                                 <button
                                     key={i + 1}
@@ -137,9 +144,9 @@ const Shop = () => {
                                     {i + 1}
                                 </button>
                             ))}
-                            
-                            <button 
-                                onClick={() => handlePageChange(currentPage + 1)} 
+
+                            <button
+                                onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={currentPage === totalPages}
                             >
                                 Next <i className="ri-arrow-right-s-line"></i>
