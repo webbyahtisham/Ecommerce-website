@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { incrementQuantity, decrementQuantity, removeFromCart } from '../redux/cartSlice';
+import { incrementQuantity, decrementQuantity, removeFromCart } from '../Redux/cartSlice';
 import 'remixicon/fonts/remixicon.css';
 
 const Cart = () => {
