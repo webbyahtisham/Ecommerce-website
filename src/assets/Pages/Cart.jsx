@@ -37,7 +37,16 @@ const Cart = () => {
                 </div>
 
                 <div className="cart-product-bottom">
-                  <p className="item-price">${item.price}</p>
+                  <p className="item-price">
+                    {item.originalPrice !== item.price ? (
+                      <>
+                        <span className="cart-new-price">${item.price}</span>
+                        <span className="cart-old-price">${item.originalPrice}</span>
+                      </>
+                    ) : (
+                      <span>${item.price}</span>
+                    )}
+                  </p>
                   <div className="item-quantity">
                     <button onClick={() => dispatch(decrementQuantity(item.id))}>-</button>
                     <span>{item.quantity}</span>
@@ -56,10 +65,10 @@ const Cart = () => {
               <span>Subtotal</span>
               <span>${subtotal}</span>
             </div>
-            <div className="summary-row">
+            {/* <div className="summary-row">
               <span>Discount (-20%)</span>
               <span className="discount">-${discount}</span>
-            </div>
+            </div> */}
             <div className="summary-row">
               <span>Delivery Fee</span>
               <span>${deliveryFee}</span>

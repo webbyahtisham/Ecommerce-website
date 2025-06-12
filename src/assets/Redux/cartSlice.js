@@ -14,10 +14,17 @@ const cartSlice = createSlice({
       const newItem = action.payload;
       const existing = state.cartItems.find(item => item.id === newItem.id);
 
+      const finalPrice = newItem.discountPrice || newItem.price;
+
       if (existing) {
         existing.quantity += 1;
       } else {
-        state.cartItems.push({ ...newItem, quantity: 1 });
+        state.cartItems.push({
+          ...newItem,
+          price: finalPrice,                // used for total calculations
+          originalPrice: newItem.price,     // show struck-through price if discounted
+          quantity: 1,
+        });
       }
     },
 
@@ -46,8 +53,8 @@ const cartSlice = createSlice({
     },
   },
 });
-export const selectCartCount = (state) =>
-  state.cart.cartItems.reduce((total, item) => total + item.quantity, 0);
+
+export const selectCartCount = (state) => state.cart.cartItems.length;
 
 export const {
   addToCart,
