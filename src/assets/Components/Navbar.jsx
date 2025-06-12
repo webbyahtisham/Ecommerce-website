@@ -1,14 +1,16 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import 'remixicon/fonts/remixicon.css';
+import { selectCartCount } from '../Redux/cartSlice';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const cartCount = useSelector(selectCartCount);
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        
+
         <button className="menu-button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           ≡
         </button>
@@ -28,15 +30,16 @@ const Navbar = () => {
 
         <div className="right-section">
           <div className="search-container">
-            <input 
-              type="text" 
-              placeholder="Search for products..." 
+            <input
+              type="text"
+              placeholder="Search for products..."
             />
           </div>
           <div className="nav-icons">
-          
-            <NavLink to="/cart">
-              <i className="ri-shopping-cart-line"></i>
+
+            <NavLink to="/cart" className="cart-icon">
+              <i className="ri-shopping-bag-line"></i>
+              <span className="cart-badge">{cartCount}</span>
             </NavLink>
             <NavLink to="/account">
               <i className="ri-account-circle-line"></i>
