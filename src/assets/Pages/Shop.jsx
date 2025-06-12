@@ -106,7 +106,8 @@ const Shop = () => {
                                             <i className="ri-shopping-bag-line"></i>
                                         </button>
                                     </div>
-                                    <h2 className="product-title">{product.title}</h2>
+                                    <div className="product-main-item">
+                                    <div className="product-title">{product.title}</div>
                                     <div className="product-rating">⭐ {product.rating}/5</div>
                                     <div className="product-price">
                                         {product.discountPrice ? (
@@ -118,6 +119,7 @@ const Shop = () => {
                                         ) : (
                                             <span className="new-price">${product.price}</span>
                                         )}
+                                    </div>
                                     </div>
                                 </div>
                             ))
