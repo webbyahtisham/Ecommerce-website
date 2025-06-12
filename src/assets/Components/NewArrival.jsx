@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from '../Pages/Product';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Redux/cartSlice';
 
 const NewArrival = ({ h1 }) => {
   const navigate = useNavigate();
   const [randomProducts, setRandomProducts] = useState([]);
+  const dispatch = useDispatch();
 
-  // Pick exactly 4 products and keep them stable
   useEffect(() => {
     const shuffled = [...products].sort(() => 0.5 - Math.random()).slice(0, 4);
     setRandomProducts(shuffled);
@@ -22,19 +24,27 @@ const NewArrival = ({ h1 }) => {
       <div className="category-start">
         <h1 className="category-title">{h1}</h1>
       </div>
+
       <div className="category-container">
         {randomProducts.map((item) => (
-          <div 
-            className="card" 
-            key={item.id} 
+          <div
+            className="card"
+            key={item.id}
             onClick={() => handleProductClick(item)}
           >
             <div className="img-wrapper">
               <img src={item.img} alt={item.title} />
-              <button className="add-to-cart">
+              <button
+                className="add-to-cart"
+                onClick={(e) => {
+                  e.stopPropagation(); // 🛑 Prevent click from bubbling to card
+                  dispatch(addToCart(item)); // ✅ FIXED: was 'product' instead of 'item'
+                }}
+              >
                 <i className="ri-shopping-bag-line"></i>
               </button>
             </div>
+
             <div className="cat-product-things">
               <div className="cat-title">{item.title}</div>
               <div className="cat-price">
@@ -52,6 +62,7 @@ const NewArrival = ({ h1 }) => {
           </div>
         ))}
       </div>
+
       <div className="category-button">
         <button>View all</button>
       </div>
