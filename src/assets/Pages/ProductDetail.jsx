@@ -4,6 +4,8 @@ import products from './Product';
 import Button from '../Components/Button';
 import Subscribe from '../Components/Subscribe';
 import TopSelling from '../Components/TopSelling';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Redux/cartSlice';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -42,7 +44,7 @@ const ProductDetail = () => {
     };
 
     document.title = `${product.title} - Product Details`;
-
+ const dispatch = useDispatch();
     return (
         <section className="product">
             <div className="product-detail-container">
@@ -86,7 +88,7 @@ const ProductDetail = () => {
                         <span>{quantity}</span>
                         <button onClick={handleIncrease}>+</button>
                     </div>
-                    <button className="product-add-to-cart">Add to Cart</button>
+                    <button onClick={() => dispatch(addToCart(product))} className="product-add-to-cart">Add to Cart</button>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from './Product';
 import 'remixicon/fonts/remixicon.css';
@@ -39,7 +39,7 @@ const Shop = () => {
         const categoryMatch = selectedCategories.length === 0 || selectedCategories.some((category) => {
             const mappedStyle = styleMap[category.toLowerCase()];
             return mappedStyle && product.style === mappedStyle;
-        });
+        });   
     
         return (
             productPrice >= activeFilters.minPrice &&
