@@ -4,6 +4,7 @@ import TopSelling from '../Components/TopSelling'
 import Subscribe from '../Components/Subscribe'
 import Button from '../Components/Button'
 import { NavLink } from 'react-router-dom';
+
 const HomePage = () => {
     return (
         <>
@@ -35,22 +36,22 @@ const HomePage = () => {
                     <div className="dress-style-container1">
                         <h2>BROWSE BY DRESS STYLE</h2>
                         <div className="dress-style-container2">
-                            <div className="dress-style-item">
-                             <img src="/Images/image 15.png" alt="Casual" />
+                            <NavLink to="/shop" className="dress-style-item">
+                                <img src="/Images/image 15.png" alt="Casual" />
                                 <span>Casual</span>
-                            </div>
-                            <div className="dress-style-item">
-                               <img src="/Images/image 16.png" alt="Formal" />
+                            </NavLink>
+                            <NavLink to="/shop" className="dress-style-item">
+                                <img src="/Images/image 16.png" alt="Formal" />
                                 <span>Formal</span>
-                            </div>
-                            <div className="dress-style-item">
-                              <img src="/Images/image 17.png" alt="Party" />
+                            </NavLink>
+                            <NavLink to="/shop" className="dress-style-item">
+                                <img src="/Images/image 17.png" alt="Party" />
                                 <span>Party</span>
-                            </div>
-                            <div className="dress-style-item">
-                             <img src="/Images/image 18.png" alt="Gym" />
+                            </NavLink>
+                            <NavLink to="/shop" className="dress-style-item">
+                                <img src="/Images/image 18.png" alt="Gym" />
                                 <span>Gym</span>
-                            </div>
+                            </NavLink>
                         </div>
                     </div>
                 </section>

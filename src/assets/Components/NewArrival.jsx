@@ -63,9 +63,6 @@ const NewArrival = ({ h1 }) => {
         ))}
       </div>
 
-      <div className="category-button">
-        <button>View all</button>
-      </div>
     </section>
   );
 };

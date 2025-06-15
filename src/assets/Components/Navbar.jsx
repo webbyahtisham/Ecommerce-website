@@ -20,9 +20,6 @@ const Navbar = () => {
         </NavLink>
 
         <div className="nav-links">
-          <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
-            Home
-          </NavLink>
           <NavLink to="/shop" className={({ isActive }) => (isActive ? 'active' : '')}>
             Shop
           </NavLink>
@@ -52,15 +49,6 @@ const Navbar = () => {
         <div className="mobile-menu">
           <NavLink to="/shop" onClick={() => setIsMenuOpen(false)}>
             Shop
-          </NavLink>
-          <NavLink to="/sale" onClick={() => setIsMenuOpen(false)}>
-            On Sale
-          </NavLink>
-          <NavLink to="/new-arrivals" onClick={() => setIsMenuOpen(false)}>
-            New Arrivals
-          </NavLink>
-          <NavLink to="/brands" onClick={() => setIsMenuOpen(false)}>
-            Brands
           </NavLink>
         </div>
       )}

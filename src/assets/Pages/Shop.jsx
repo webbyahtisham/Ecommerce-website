@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css';
 import FiltersBar from '../Components/FiltersBar';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../Redux/cartSlice';
+import Subscribe from '../Components/Subscribe';
 const Shop = () => {
 
     const filterPanelRef = useRef(null);
@@ -73,6 +74,8 @@ const Shop = () => {
     }, [activeFilters]);
     const dispatch = useDispatch();
     return (
+        <>
+      
         <div className="shop-wrapper">
             <div className="shop">
                 <div className={`filter-panel ${isFilterOpen ? 'open' : ''}`}>
@@ -163,6 +166,8 @@ const Shop = () => {
                 </button>
             </div>
         </div>
+        <Subscribe/>
+          </>
     );
 };
 
