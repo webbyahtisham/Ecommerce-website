@@ -12,38 +12,44 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const newItem = action.payload;
-      const existing = state.cartItems.find(item => item.id === newItem.id);
 
-      const finalPrice = newItem.discountPrice || newItem.price;
+      // Match by id + selectedSize
+      const existing = state.cartItems.find(
+        item => item.id === newItem.id && item.selectedSize === newItem.selectedSize
+      );
 
       if (existing) {
-        existing.quantity += 1;
+        existing.quantity += newItem.quantity;
       } else {
-        state.cartItems.push({
-          ...newItem,
-          price: finalPrice,                // used for total calculations
-          originalPrice: newItem.price,     // show struck-through price if discounted
-          quantity: 1,
-        });
+        state.cartItems.push({ ...newItem });
       }
     },
 
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
+      // Remove by id + size (pass {id, selectedSize} as payload)
+      state.cartItems = state.cartItems.filter(
+        item => !(item.id === action.payload.id && item.selectedSize === action.payload.selectedSize)
+      );
     },
 
     incrementQuantity: (state, action) => {
-      const item = state.cartItems.find(item => item.id === action.payload);
+      const item = state.cartItems.find(
+        item => item.id === action.payload.id && item.selectedSize === action.payload.selectedSize
+      );
       if (item) item.quantity += 1;
     },
 
     decrementQuantity: (state, action) => {
-      const item = state.cartItems.find(item => item.id === action.payload);
+      const item = state.cartItems.find(
+        item => item.id === action.payload.id && item.selectedSize === action.payload.selectedSize
+      );
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
         } else {
-          state.cartItems = state.cartItems.filter(i => i.id !== item.id);
+          state.cartItems = state.cartItems.filter(
+            i => !(i.id === item.id && i.selectedSize === item.selectedSize)
+          );
         }
       }
     },
@@ -54,7 +60,9 @@ const cartSlice = createSlice({
   },
 });
 
-export const selectCartCount = (state) => state.cart.cartItems.length;
+// Example: could be used to sum total items (not just array length)
+export const selectCartCount = (state) =>
+  state.cart.cartItems.reduce((total, item) => total + item.quantity, 0);
 
 export const {
   addToCart,

@@ -44,7 +44,7 @@ const ProductDetail = () => {
     };
 
     document.title = `${product.title} - Product Details`;
- const dispatch = useDispatch();
+    const dispatch = useDispatch();
     return (
         <section className="product">
             <div className="product-detail-container">
@@ -88,7 +88,16 @@ const ProductDetail = () => {
                         <span>{quantity}</span>
                         <button onClick={handleIncrease}>+</button>
                     </div>
-                    <button onClick={() => dispatch(addToCart(product))} className="product-add-to-cart">Add to Cart</button>
+                    <button
+                        onClick={() => dispatch(addToCart({
+                            ...product,
+                            quantity,
+                            selectedSize
+                        }))}
+                        className="product-add-to-cart"
+                    >
+                        Add to Cart
+                    </button>
                 </div>
             </div>
 
