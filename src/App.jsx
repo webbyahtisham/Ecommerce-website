@@ -6,11 +6,13 @@ import ProductDetail from './assets/Pages/ProductDetail';
 import Cart from './assets/Pages/Cart'
 import Homepage from './assets/Pages/HomePage'
 import Footer from './assets/Components/Footer';
+import ScrollToTop from './assets/Components/ScrollToTop';
 
 function App() {
   return (
     <>
       <Navbar />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<Shop />} />
