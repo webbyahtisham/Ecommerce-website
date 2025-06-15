@@ -34,15 +34,6 @@ const NewArrival = ({ h1 }) => {
           >
             <div className="img-wrapper">
               <img src={item.img} alt={item.title} />
-              <button
-                className="add-to-cart"
-                onClick={(e) => {
-                  e.stopPropagation(); // 🛑 Prevent click from bubbling to card
-                  dispatch(addToCart(item)); // ✅ FIXED: was 'product' instead of 'item'
-                }}
-              >
-                <i className="ri-shopping-bag-line"></i>
-              </button>
             </div>
 
             <div className="cat-product-things">

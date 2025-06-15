@@ -99,15 +99,6 @@ const Shop = () => {
                                 <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
                                     <div className="shop-img-wrapper">
                                         <img src={product.img} alt={product.title} className="product-image" />
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation(); // Prevent card click
-                                                dispatch(addToCart(product));
-                                            }}
-                                            className="add-to-cart"
-                                        >
-                                            <i className="ri-shopping-bag-line"></i>
-                                        </button>
                                     </div>
                                     <div className="product-main-item">
                                     <div className="product-title">{product.title}</div>

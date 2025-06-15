@@ -11,9 +11,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const newItem = action.payload;
+      const newItem = {
+        ...action.payload,
+        quantity: action.payload.quantity ?? 1,
+        selectedSize: action.payload.selectedSize ?? 'Default',
+      };
 
-      // Match by id + selectedSize
       const existing = state.cartItems.find(
         item => item.id === newItem.id && item.selectedSize === newItem.selectedSize
       );
@@ -21,12 +24,11 @@ const cartSlice = createSlice({
       if (existing) {
         existing.quantity += newItem.quantity;
       } else {
-        state.cartItems.push({ ...newItem });
+        state.cartItems.push(newItem);
       }
     },
 
     removeFromCart: (state, action) => {
-      // Remove by id + size (pass {id, selectedSize} as payload)
       state.cartItems = state.cartItems.filter(
         item => !(item.id === action.payload.id && item.selectedSize === action.payload.selectedSize)
       );
@@ -60,9 +62,8 @@ const cartSlice = createSlice({
   },
 });
 
-// Example: could be used to sum total items (not just array length)
-export const selectCartCount = (state) =>
-  state.cart.cartItems.reduce((total, item) => total + item.quantity, 0);
+// Shows number of different unique products (id + size)
+export const selectCartCount = (state) => state.cart.cartItems.length;
 
 export const {
   addToCart,

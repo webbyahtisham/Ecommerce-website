@@ -34,15 +34,6 @@ const TopSelling = ({ h1 }) => {
           >
             <div className="img-wrapper">
               <img src={item.img} alt={item.title} />
-              <button
-                className="add-to-cart"
-                onClick={(e) => {
-                  e.stopPropagation(); // 🛑 Prevent card click
-                  dispatch(addToCart(item)); // ✅ Add to cart
-                }}
-              >
-                <i className="ri-shopping-bag-line"></i>
-              </button>
             </div>
 
             <div className="cat-product-things">
