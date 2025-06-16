@@ -75,90 +75,87 @@ const Shop = () => {
     const dispatch = useDispatch();
     return (
         <>
-      
-        <div className="shop-wrapper">
-            <div className="shop">
-                <div className={`filter-panel ${isFilterOpen ? 'open' : ''}`}>
-                    <FiltersBar
-                        onApplyFilters={setActiveFilters}
-                        onClearFilters={clearAllFilters}
-                    />
-                </div>
 
-                <div className="shop-container">
-                    <div className="shop-header">
-                        <h1 className="shop-title">Shop</h1>
-                        <div className="products-count">
-                            Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
-                        </div>
+            <div className="shop-wrapper">
+                <div className="shop">
+                    <div className={`filter-panel ${isFilterOpen ? 'open' : ''}`}>
+                        <FiltersBar
+                            onApplyFilters={setActiveFilters}
+                            onClearFilters={clearAllFilters}
+                        />
                     </div>
 
-                    <div className="products-grid">
-                        {currentProducts.length > 0 ? (
-                            currentProducts.map((product) => (
-                                <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
-                                    <div className="shop-img-wrapper">
-                                        <img src={product.img} alt={product.title} className="product-image" />
+                    <div className="shop-container">
+                        <div className="shop-header">
+                            <h1 className="shop-title">Shop</h1>
+                            <button className="filter-menu-toggle" onClick={toggleFilter}>
+                                <i className="ri-menu-2-fill"></i>
+                                Filter
+                            </button>
+                        </div>
+
+                        <div className="products-grid">
+                            {currentProducts.length > 0 ? (
+                                currentProducts.map((product) => (
+                                    <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
+                                        <div className="shop-img-wrapper">
+                                            <img src={product.img} alt={product.title} className="product-image" />
+                                        </div>
+                                        <div className="product-main-item">
+                                            <div className="product-title">{product.title}</div>
+                                            <div className="product-rating">⭐ {product.rating}/5</div>
+                                            <div className="product-price">
+                                                {product.discountPrice ? (
+                                                    <>
+                                                        <span className="new-price">${product.discountPrice}</span>
+                                                        <span className="old-price">${product.price}</span>
+                                                        <span className="discount">-{product.discount}%</span>
+                                                    </>
+                                                ) : (
+                                                    <span className="new-price">${product.price}</span>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="product-main-item">
-                                    <div className="product-title">{product.title}</div>
-                                    <div className="product-rating">⭐ {product.rating}/5</div>
-                                    <div className="product-price">
-                                        {product.discountPrice ? (
-                                            <>
-                                                <span className="new-price">${product.discountPrice}</span>
-                                                <span className="old-price">${product.price}</span>
-                                                <span className="discount">-{product.discount}%</span>
-                                            </>
-                                        ) : (
-                                            <span className="new-price">${product.price}</span>
-                                        )}
-                                    </div>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="no-products">We don't have this product 🫤</div>
+                                ))
+                            ) : (
+                                <div className="no-products">We don't have this product 🫤</div>
+                            )}
+                        </div>
+
+                        {filteredProducts.length > productsPerPage && (
+                            <div className="pagination">
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                >
+                                    <i className="ri-arrow-left-s-line"></i> Previous
+                                </button>
+
+                                {Array.from({ length: totalPages }, (_, i) => (
+                                    <button
+                                        key={i + 1}
+                                        onClick={() => handlePageChange(i + 1)}
+                                        className={currentPage === i + 1 ? 'active' : ''}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))}
+
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next <i className="ri-arrow-right-s-line"></i>
+                                </button>
+                            </div>
                         )}
                     </div>
 
-                    {filteredProducts.length > productsPerPage && (
-                        <div className="pagination">
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1}
-                            >
-                                <i className="ri-arrow-left-s-line"></i> Previous
-                            </button>
-
-                            {Array.from({ length: totalPages }, (_, i) => (
-                                <button
-                                    key={i + 1}
-                                    onClick={() => handlePageChange(i + 1)}
-                                    className={currentPage === i + 1 ? 'active' : ''}
-                                >
-                                    {i + 1}
-                                </button>
-                            ))}
-
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                            >
-                                Next <i className="ri-arrow-right-s-line"></i>
-                            </button>
-                        </div>
-                    )}
                 </div>
-
-                <button className="filter-toggle-button" onClick={toggleFilter}>
-                    {isFilterOpen ? <i className="ri-close-line"></i> : <i className="ri-filter-3-line"></i>}
-                    <span className="filter-text">{isFilterOpen ? 'Close' : 'Filters'}</span>
-                </button>
             </div>
-        </div>
-        <Subscribe/>
-          </>
+            <Subscribe />
+        </>
     );
 };
 
