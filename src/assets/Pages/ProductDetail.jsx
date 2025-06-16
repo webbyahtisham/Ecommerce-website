@@ -6,6 +6,7 @@ import Subscribe from '../Components/Subscribe';
 import TopSelling from '../Components/TopSelling';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../Redux/cartSlice';
+import { toast } from 'react-hot-toast';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -13,10 +14,10 @@ const ProductDetail = () => {
     const product = location.state?.product || products.find((item) => item.id === parseInt(id));
 
     const [quantity, setQuantity] = useState(1);
-    const [selectedSize, setSelectedSize] = useState("Small");
+    const [selectedSize, setSelectedSize] = useState(null);
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [activeSection, setActiveSection] = useState('details');
-    const [newReview, setNewReview] = useState({ text: '', rating: 5 });
+    const [newReview, setNewReview] = useState({ name: '', text: '', rating: 5 });
 
     const [reviews, setReviews] = useState([
         { name: "Samantha D.", date: "August 16, 2023", text: "I love this product!", rating: 5 },
@@ -30,21 +31,36 @@ const ProductDetail = () => {
     const handleSizeClick = (size) => setSelectedSize(size);
     const handleIncrease = () => setQuantity((prev) => prev + 1);
     const handleDecrease = () => quantity > 1 && setQuantity((prev) => prev - 1);
-
     const handleSubmitReview = (e) => {
         e.preventDefault();
         setReviews([...reviews, {
-            name: "New User",
+            name: newReview.name || "Anonymous",
             date: new Date().toLocaleDateString('en-US'),
             text: newReview.text,
             rating: newReview.rating,
         }]);
         setShowReviewForm(false);
-        setNewReview({ text: '', rating: 5 });
+        setNewReview({ name: '', text: '', rating: 5 });
     };
 
     document.title = `${product.title} - Product Details`;
     const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        if (!selectedSize) {
+            toast.error("Please select a size!");
+            return;
+        }
+
+        dispatch(addToCart({
+            ...product,
+            quantity,
+            selectedSize
+        }));
+
+        toast.success(`${product.title} added to cart!`);
+    };
+
     return (
         <section className="product">
             <div className="product-detail-container">
@@ -89,11 +105,7 @@ const ProductDetail = () => {
                         <button onClick={handleIncrease}>+</button>
                     </div>
                     <button
-                        onClick={() => dispatch(addToCart({
-                            ...product,
-                            quantity,
-                            selectedSize
-                        }))}
+                        onClick={handleAddToCart}
                         className="product-add-to-cart"
                     >
                         Add to Cart
@@ -102,9 +114,24 @@ const ProductDetail = () => {
             </div>
 
             <div className="section-nav">
-                <button onClick={() => setActiveSection('details')}>Product Details</button>
-                <button onClick={() => setActiveSection('reviews')}>Reviews ({reviews.length})</button>
-                <button onClick={() => setActiveSection('faq')}>FAQs</button>
+                <button
+                    className={activeSection === 'details' ? 'active-tab' : ''}
+                    onClick={() => setActiveSection('details')}
+                >
+                    Product Details
+                </button>
+                <button
+                    className={activeSection === 'reviews' ? 'active-tab' : ''}
+                    onClick={() => setActiveSection('reviews')}
+                >
+                    Reviews ({reviews.length})
+                </button>
+                <button
+                    className={activeSection === 'faq' ? 'active-tab' : ''}
+                    onClick={() => setActiveSection('faq')}
+                >
+                    FAQs
+                </button>
             </div>
 
             {activeSection === 'details' && (
@@ -166,6 +193,16 @@ const ProductDetail = () => {
                 <div className="modal-overlay">
                     <form className="review-form" onSubmit={handleSubmitReview}>
                         <h2>Write a Review</h2>
+
+                        <input
+                            className='showreview-name'
+                            type="text"
+                            value={newReview.name}
+                            onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
+                            placeholder="Your name"
+                            required
+                        />
+
                         <div className="rating-selector">
                             {[1, 2, 3, 4, 5].map((num) => (
                                 <button
@@ -178,12 +215,14 @@ const ProductDetail = () => {
                                 </button>
                             ))}
                         </div>
+
                         <textarea
                             value={newReview.text}
                             onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
                             placeholder="Share your experience..."
                             required
                         />
+
                         <div className="form-buttons">
                             <button type="submit">Submit</button>
                             <button type="button" onClick={() => setShowReviewForm(false)}>

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from '../Pages/Product';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../Redux/cartSlice';
+
 
 const TopSelling = ({ h1 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {

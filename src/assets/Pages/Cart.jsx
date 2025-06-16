@@ -1,13 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementQuantity, decrementQuantity, removeFromCart } from '../Redux/cartSlice';
 import 'remixicon/fonts/remixicon.css';
+import { toast } from 'react-hot-toast';
 
 const Cart = () => {
   const { cartItems, deliveryFee, discount } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calculate subtotal using discounted price if available
+  const subtotal = cartItems.reduce((acc, item) => {
+    const priceToUse = item.discountPrice || item.price;
+    return acc + priceToUse * item.quantity;
+  }, 0);
+
   const total = subtotal - discount + deliveryFee;
+
+  const handleRemove = (item) => {
+    dispatch(removeFromCart({ id: item.id, selectedSize: item.selectedSize }));
+    toast.success(`${item.title} (Size: ${item.selectedSize}) removed from cart!`);
+  };
 
   return (
     <div className="cart-container">
@@ -27,9 +38,7 @@ const Cart = () => {
                     <h3 className="cart-product-title">{item.title}</h3>
                     <i
                       className="ri-delete-bin-fill"
-                      onClick={() =>
-                        dispatch(removeFromCart({ id: item.id, selectedSize: item.selectedSize }))
-                      }
+                      onClick={() => handleRemove(item)}
                       title="Remove item"
                     ></i>
                   </div>
@@ -41,10 +50,12 @@ const Cart = () => {
 
                   <div className="cart-product-bottom">
                     <p className="item-price">
-                      {item.originalPrice && item.originalPrice !== item.price ? (
+                      {item.discountPrice ? (
                         <>
-                          <span className="cart-new-price">${item.price.toFixed(2)}</span>
-                          <span className="cart-old-price">${item.originalPrice.toFixed(2)}</span>
+                          <span className="cart-new-price">${item.discountPrice.toFixed(2)}</span>
+                          <span className="cart-old-price" style={{ textDecoration: 'line-through', color: '#999', marginLeft: '8px' }}>
+                            ${item.price.toFixed(2)}
+                          </span>
                         </>
                       ) : (
                         <span>${item.price.toFixed(2)}</span>
@@ -86,6 +97,12 @@ const Cart = () => {
               <span>Delivery Fee</span>
               <span>${deliveryFee.toFixed(2)}</span>
             </div>
+            {discount > 0 && (
+              <div className="summary-row">
+                <span>Discount</span>
+                <span>-${discount.toFixed(2)}</span>
+              </div>
+            )}
             <div className="summary-divider"></div>
             <div className="summary-row total-row">
               <span>Total</span>

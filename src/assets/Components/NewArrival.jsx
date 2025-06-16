@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from '../Pages/Product';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../Redux/cartSlice';
+
 
 const NewArrival = ({ h1 }) => {
   const navigate = useNavigate();
   const [randomProducts, setRandomProducts] = useState([]);
-  const dispatch = useDispatch();
+
 
   useEffect(() => {
     const shuffled = [...products].sort(() => 0.5 - Math.random()).slice(0, 4);
