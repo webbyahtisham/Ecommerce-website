@@ -61,17 +61,18 @@ const Cart = () => {
                         <span>${item.price.toFixed(2)}</span>
                       )}
                     </p>
-
-                    <div className="item-quantity">
+                    <div className="quantity-selector">
                       <button
+                        className="quantity-btn"
                         onClick={() =>
                           dispatch(decrementQuantity({ id: item.id, selectedSize: item.selectedSize }))
                         }
                       >
                         -
                       </button>
-                      <span>{item.quantity}</span>
+                      <span className="quantity-value">{item.quantity}</span>
                       <button
+                        className="quantity-btn"
                         onClick={() =>
                           dispatch(incrementQuantity({ id: item.id, selectedSize: item.selectedSize }))
                         }
